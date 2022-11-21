@@ -13,11 +13,11 @@ namespace TesteDeConexaoMySQL
             {
                 MySqlConnectionStringBuilder builder = new MySqlConnectionStringBuilder();
 
-                builder.Server = "bd.asp.hostazul.com.br";
+                builder.Server = "endereco_servidor";
                 builder.Port = 4406;
-                builder.UserID = "16444_teste";
-                builder.Password = "teste@123";
-                builder.Database = "16444_teste";
+                builder.UserID = "seu_usuario";
+                builder.Password = "sua_senha";
+                builder.Database = "sua_base_de_dados";
 
                 tempo.Start();
                 using (MySqlConnection connection = new MySqlConnection(builder.ConnectionString))
