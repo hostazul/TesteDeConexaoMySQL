@@ -24,7 +24,7 @@ namespace TesteDeConexaoMySQL
                 {
                     connection.Open();
 
-                    var sql = "SELECT * FROM Teste Limit 1";
+                    var sql = "SELECT * FROM sua_tabela Limit 1";
 
                     using (MySqlCommand command = new MySqlCommand(sql, connection))
                     {
