@@ -21,7 +21,7 @@ namespace TesteDeConexaoMySQL
                 builder.Database = "sua_base_de_dados";
                 var tabela = "sua_tabela";
 
-                tempoDeExecucaoQuery.Start();
+                
                 using (MySqlConnection connection = new MySqlConnection(builder.ConnectionString))
                 {
                     tempoConexao.Start();
@@ -32,6 +32,7 @@ namespace TesteDeConexaoMySQL
 
                     using (MySqlCommand command = new MySqlCommand(sql, connection))
                     {
+                        tempoDeExecucaoQuery.Start();
                         using (MySqlDataReader reader = command.ExecuteReader())
                         {
                             while (reader.Read())
