@@ -8,7 +8,8 @@ namespace TesteDeConexaoMySQL
         static void Main(string[] args)
         {
             Console.WriteLine("Início do Teste de conexão com banco de dados");
-            var tempo = new Stopwatch();
+            var tempoConexao = new Stopwatch();
+            var tempoDeExecucaoQuery = new Stopwatch();
             try
             {
                 MySqlConnectionStringBuilder builder = new MySqlConnectionStringBuilder();
@@ -19,10 +20,12 @@ namespace TesteDeConexaoMySQL
                 builder.Password = "sua_senha";
                 builder.Database = "sua_base_de_dados";
 
-                tempo.Start();
+                tempoDeExecucaoQuery.Start();
                 using (MySqlConnection connection = new MySqlConnection(builder.ConnectionString))
                 {
+                    tempoConexao.Start();
                     connection.Open();
+                    tempoConexao.Stop();
 
                     var sql = "SELECT * FROM sua_tabela Limit 1";
 
@@ -33,11 +36,11 @@ namespace TesteDeConexaoMySQL
                             while (reader.Read())
                             {
                                 Console.WriteLine($"A consulta foi executada com sucesso e retornou o valor de {reader.GetValue(0)}");
-                                tempo.Stop();
+                                tempoDeExecucaoQuery.Stop();
                             }
                         }
 
-                        Console.WriteLine($"O tempo de resposta da consulta no banco de dados foi de {tempo.Elapsed.TotalSeconds} segundos");
+                        Console.WriteLine($"O tempo para conectar na base foi de {tempoConexao.Elapsed.TotalSeconds} segundos e o tempo de resposta da consulta no banco de dados foi de {tempoDeExecucaoQuery.Elapsed.TotalSeconds} segundos");
                     }
                 }
             }
