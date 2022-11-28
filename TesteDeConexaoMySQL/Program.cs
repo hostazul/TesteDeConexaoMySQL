@@ -19,6 +19,7 @@ namespace TesteDeConexaoMySQL
                 builder.UserID = "seu_usuario";
                 builder.Password = "sua_senha";
                 builder.Database = "sua_base_de_dados";
+                var tabela = "sua_tabela";
 
                 tempoDeExecucaoQuery.Start();
                 using (MySqlConnection connection = new MySqlConnection(builder.ConnectionString))
@@ -27,7 +28,7 @@ namespace TesteDeConexaoMySQL
                     connection.Open();
                     tempoConexao.Stop();
 
-                    var sql = "SELECT * FROM sua_tabela Limit 1";
+                    var sql = $"SELECT * FROM {tabela} Limit 1";
 
                     using (MySqlCommand command = new MySqlCommand(sql, connection))
                     {
